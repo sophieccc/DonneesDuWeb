@@ -128,27 +128,53 @@ function BlueBackgroundWhiteButton() {
 	var bouton= window.document.getElementById("myButton1");
 	bouton.style = "color:white" ;
 }
-
+////////BOUTON 2///////////////////
 function WhiteBackground() {
 	var arriereplan = window.document.getElementById("body");
 	arriereplan.style = "background-color:white" ;
 }
-
-function Bouton3_affichePays(xmlDoc, xslDoc, newElement) {
-	var codePays = window.document.getElementById("myText3");
-
+////////BOUTON 3///////////////////
+function CountryInfo(xmlURL, xslURL, newElement) {
+	var texteCode = window.document.getElementById("myText");
+	
+	//Loading files
 	var xsltProcessor=new XSLTProcessor();
-	var xslDocument = chargerHttpXML(xslDoc);
+	var xslDocument = chargerHttpXML(xslURL);
 	xsltProcessor.importStylesheet(xslDocument);
-	xsltProcessor.setParameter("","code",codePays.value) ;
+	xsltProcessor.setParameter("","code",texteCode.value) ;
 		
-	var xmlDocument = chargerHttpXML(xmlDoc);
+	var xmlDocument = chargerHttpXML(xmlURL);
 	var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
 	
-	//Remplacement dans le fichier html
-	var elementHtmlParent = window.document.getElementById("nom_capital");
+	//Edit HTML
+	var elementHtmlParent = window.document.getElementById("Renseignements");
 	var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
 	var elementAInserer = newXmlDocument.getElementsByTagName(newElement)[0];
 	elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
 	
+}
+////////BOUTON 4///////////////////
+function DisplayDrawing(xmlDocumentUrl,newElement) {
+	var xmlDocument = chargerHttpXML(xmlDocumentUrl);	
+	var elementHtmlParent = window.document.getElementById("image");
+	var elementAInserer = xmlDocument.getElementsByTagName(newElement)[0];
+	var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
+    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+}
+
+////////BOUTON 5///////////////////
+function DisplayTitle()
+{
+	var elementHtmlARemplir = window.document.getElementById("Form");
+	elementHtmlARemplir.innerHTML = this.getAttribute("title") ; 
+}
+
+function Clickable() {
+	var cercle = window.document.getElementById("leCercle");
+	var rect = window.document.getElementById("leRect");
+	var courbe = window.document.getElementById("laCourbe");
+	
+	cercle.addEventListener("click", DisplayTitle);
+	rect.addEventListener("click", DisplayTitle);
+	courbe.addEventListener("click", DisplayTitle);
 }

@@ -19,18 +19,23 @@
         <br />
         <input name="Bouton2" type="button" id="myButton2" onClick="WhiteBackground()" value="Arriere-plan blanc" />
         <br />
-        <input name="Bouton3" type="button" id="myButton3" onClick="WhiteBackground()" value="Renseignements pays" />
+        <input name="Bouton3" type="button" id="myButton3" onClick="CountryInfo('countriesTP.xml', 'cherchePays.xsl', 'ul')" value="Renseignements pays" />
+        <input name="text" type="text" id="myText" value="Code pays"></input>
         <br />
-        <input name="button2" type="button" id="myButton3" onClick="Bouton3_ajaxEmployees('Employees.xml');" value="3. AJAX avec Employees.xml" />
+        <input name="Bouton4" type="button" id="myButton4" onClick="DisplayDrawing('exemple.svg','svg')" value="Affichage du dessin" />
         <br />
+        <input name="Bouton5" type="button" id="myButton5" onClick="Clickable()" value="Rendre les éléments du dessin cliquables" />
+		<br />
     </p>
-    <div>
-        <p>Les noms sont : <br/>
-            <span id="id_nom_a_remplacer" style="color: red; font-weight: bold;">LES NOMS (Cet &eacute;l&eacute;ment va &ecirc;tre remplac&eacute; par les noms) </span>.</p>
+    
+    <div id="Renseignements">
+        <p style="color: black; font-weight: bold;">Renseignements du pays recherché: </p>
     </div>
-    <div id="id_element_a_remplacer">
-        <p style="color: red; font-weight: bold;">Cet &eacute;l&eacute;ment va &ecirc;tre remplac&eacute; par une bibliographie en XML mise en forme par une feuille de style XSLT...</p>
-    </div>
+
+    <div id="image" align="center">
+        <p align="center" style="font-weight:bold">Affichage du dessin</p>
+        <p id ="Form" align="center" style="font-weight:bold">Titre de la forme cliquée </p>
+	</div>
 
 
 </body>
