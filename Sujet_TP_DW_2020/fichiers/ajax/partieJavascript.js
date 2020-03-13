@@ -283,6 +283,7 @@ function retrieveCurrencies() {
     showCurrency = true;
 }
 
+////////BOUTON 11///////////////////
 function getCases() {
     showCorona = true;
 }
