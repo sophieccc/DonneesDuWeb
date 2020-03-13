@@ -234,9 +234,8 @@ function autoCompletion(xmlDocumentUrl) {
 }
 
 function retrieveCurrencies() {
-    var data = chargerHttpJSON("https://restcountries.eu/rest/v2/currency/cop");
-    console.log(data[0]);
-    console.log(data["currencies"]["name"]);
+    var data = chargerHttpJSON("https://restcountries.eu/rest/v2/currency/cop")[0];
+    console.log(data.currencies[0].name);
     var lesPays = window.document.getElementsByTagName("path");
     for (i = 0; i < lesPays.length; i++) {
         lesPays[i].addEventListener("mouseover", function() {});
