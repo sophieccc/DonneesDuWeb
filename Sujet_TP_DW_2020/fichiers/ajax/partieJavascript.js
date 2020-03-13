@@ -206,8 +206,8 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
     var elementAInserer = newXmlDocument.getElementsByTagName(newElementName)[0];
     elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
     var data = chargerHttpJSON("https://restcountries.eu/rest/v2/alpha/" + codePays);
+    var name = data["name"];
     if (showCurrency) {
-        var name = data["name"];
         var currencyComponent = window.document.getElementById("curr");
         currencyComponent.innerHTML = data.currencies[0].name;
     }
@@ -254,28 +254,25 @@ function mouseHover(xmlDocumentUrl, xslDocumentUrl, newElementName) {
 }
 
 ////////BOUTON 9///////////////////
-function autoCompletion(xmlDocumentUrl)
-{	
-	var texteCode = window.document.getElementById("myText");
-    texteCode.setAttribute("list","codeList");
-    var txtcont=texteCode.textContent;
-    texteCode.setAttribute('autocomplete','on');
-	texteCode.innerHTML = "<datalist id = 'codeList'></datalist>" ;
-	
-	var xmlDocument = chargerHttpXML(xmlDocumentUrl);
+function autoCompletion(xmlDocumentUrl) {
+    var texteCode = window.document.getElementById("myText");
+    texteCode.setAttribute("list", "codeList");
+    var txtcont = texteCode.textContent;
+    texteCode.setAttribute('autocomplete', 'on');
+    texteCode.innerHTML = "<datalist id = 'codeList'></datalist>";
+
+    var xmlDocument = chargerHttpXML(xmlDocumentUrl);
     var codes = xmlDocument.getElementsByTagName("cca2");
     console.log(codes);
-	var liste = "<option value='Code pays'/>" ;
-	for(var i = 0 ; i < codes.length ; i++)
-	{
-        var codetxt=codes[i].firstChild.nodeValue;
-        if(codetxt.startsWith(txtcont))
-        {
-            liste += "<option value ='" + codes[i].firstChild.nodeValue + "'/>" ;
+    var liste = "<option value='Code pays'/>";
+    for (var i = 0; i < codes.length; i++) {
+        var codetxt = codes[i].firstChild.nodeValue;
+        if (codetxt.startsWith(txtcont)) {
+            liste += "<option value ='" + codes[i].firstChild.nodeValue + "'/>";
         }
-	}
-	var component = window.document.getElementById("codeList");
-	component.innerHTML = liste ;
+    }
+    var component = window.document.getElementById("codeList");
+    component.innerHTML = liste;
 }
 
 ////////BOUTON 10///////////////////
