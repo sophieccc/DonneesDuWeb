@@ -212,6 +212,7 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
         currencyComponent.innerHTML = data.currencies[0].name;
     }
     if (showCorona) {
+        
         fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php", {
                 "method": "GET",
                 "headers": {
@@ -229,9 +230,9 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
                         }
                         var coronaComponent = window.document.getElementById("corona");
                         if (cases >= 0) {
-                            coronaComponent.innerHTML = "No. of COVID-19 cases: " + cases;
+                            coronaComponent.innerHTML = "Nombre de cas de COVID-19: " + cases;
                         } else {
-                            coronaComponent.innerHTML = "Could not retrieve no. of cases";
+                            coronaComponent.innerHTML = "Impossible de récupérer le nombre de cas de COVID-19";
                         }
                     }))
                     .catch(err => {
