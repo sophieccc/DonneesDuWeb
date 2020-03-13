@@ -13,11 +13,18 @@
                 <xsl:apply-templates select="//metadonnees"/>
                 <p>Pays avec 6 voisins: 
                 <xsl:for-each select="//country[count(borders/neighbour) = 6]">
-                <xsl:value-of select="current()/name/common"/> 
-                <xsl:if test="position() != last()">, </xsl:if> 
+                    <xsl:value-of select="current()/name/common"/> 
+                    <xsl:if test="position() != last()">, </xsl:if> 
                 </xsl:for-each>
                 </p>
-                <p>Pays ayant le plus de voisins : </p>
+                <p>Pays ayant le plus de voisins : 
+			  		<xsl:for-each select="//country">
+			  			<xsl:sort select="count(borders/*)" data-type="number" order="descending" />
+			  			<xsl:if test='position() = 1'>
+							<xsl:value-of select='name/common' /> , nob de voisins : <xsl:value-of select='count(borders/*)' />
+			  			</xsl:if>
+			  		</xsl:for-each>
+                </p>
                 <xsl:apply-templates select="//countries"/>
             </body>
         </html> 
