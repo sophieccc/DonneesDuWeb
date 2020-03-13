@@ -176,16 +176,46 @@ function ClickableForm() {
     }
 }
 
-////////BOUTON 6///////////////////
+////////BOUTON 7///////////////////
 function DisplayCountryName() {
     var elementHtmlARemplir = window.document.getElementById("Countries");
     elementHtmlARemplir.innerHTML = this.getAttribute("countryname");
 }
 
 function ClickableCountry() {
-    var formes = window.document.getElementsByTagName("path");
-    console.log(formes);
-    for (var i = 0; i < formes.length; i++) {
-        formes[i].addEventListener("click", DisplayCountryName);
+    var pays = window.document.getElementsByTagName("path");
+    for (var i = 0; i < pays.length; i++) {
+        pays[i].addEventListener("click", DisplayCountryName);
+    }
+}
+
+////////BOUTON 8///////////////////
+function helper(xmlDocumentUrl, xslDocumentUrl, newElementName,pays)
+{
+	pays.style = "fill:blue";
+	var codePays = pays.id ;
+	var xsltProcessor=new XSLTProcessor();
+	var xslDocument = chargerHttpXML(xslDocumentUrl);
+	xsltProcessor.importStylesheet(xslDocument);
+	xsltProcessor.setParameter("","code",codePays) ;
+	var xmlDocument = chargerHttpXML(xmlDocumentUrl);
+	var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+	var elementHtmlParent = window.document.getElementById("tableauCarte");
+	var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
+	var elementAInserer = newXmlDocument.getElementsByTagName(newElementName)[0];
+	elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+}
+
+function quittePays()
+{
+	this.style = "fill:#CCCCCC";
+}
+
+function mouseHover(xmlDocumentUrl, xslDocumentUrl, newElementName)
+{
+	var lesPays = window.document.getElementsByTagName("path");
+    for (i = 0; i < lesPays.length; i++) {
+		lesPays[i].addEventListener("mouseover",function(){helper(xmlDocumentUrl, xslDocumentUrl, newElementName,this);}) ;
+		lesPays[i].addEventListener("mouseout",quittePays);
     }
 }
