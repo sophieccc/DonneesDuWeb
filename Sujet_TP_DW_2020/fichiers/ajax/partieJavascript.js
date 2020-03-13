@@ -134,12 +134,7 @@ function WhiteBackground() {
     arriereplan.style = "background-color:white";
 }
 
-function AfficheSvgExemple(svgFile) {
-    var svgDoc = chargerHttpXML(svgFile);
-    var svgText = new XMLSerializer().serializeToString(svgDoc);
-    var parentDiv = document.getElementById('exemple');
-    parentDiv.innerHTML = svgText;
-}
+
 ////////BOUTON 3///////////////////
 function CountryInfo(xmlURL, xslURL, newElement) {
 	var texteCode = window.document.getElementById("myText");
@@ -161,12 +156,11 @@ function CountryInfo(xmlURL, xslURL, newElement) {
 	
 }
 ////////BOUTON 4///////////////////
-function DisplayDrawing(xmlDocumentUrl,newElement) {
-	var xmlDocument = chargerHttpXML(xmlDocumentUrl);	
-	var elementHtmlParent = window.document.getElementById("image");
-	var elementAInserer = xmlDocument.getElementsByTagName(newElement)[0];
-	var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
-    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+function AfficheSvgExemple(svgFile) {
+    var svgDoc = chargerHttpXML(svgFile);
+    var svgText = new XMLSerializer().serializeToString(svgDoc);
+    var parentDiv = document.getElementById('exemple');
+    parentDiv.innerHTML = svgText;
 }
 
 ////////BOUTON 5///////////////////
@@ -184,23 +178,4 @@ function Clickable() {
 	cercle.addEventListener("click", DisplayTitle);
 	rect.addEventListener("click", DisplayTitle);
 	courbe.addEventListener("click", DisplayTitle);
-}
-
-function Bouton3_affichePays(xmlDoc, xslDoc, newElement) {
-    var codePays = window.document.getElementById("myText3");
-
-    var xsltProcessor = new XSLTProcessor();
-    var xslDocument = chargerHttpXML(xslDoc);
-    xsltProcessor.importStylesheet(xslDocument);
-    xsltProcessor.setParameter("", "code", codePays.value);
-
-    var xmlDocument = chargerHttpXML(xmlDoc);
-    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
-
-    //Remplacement dans le fichier html
-    var elementHtmlParent = window.document.getElementById("nom_capital");
-    var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
-    var elementAInserer = newXmlDocument.getElementsByTagName(newElement)[0];
-    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
-
 }
