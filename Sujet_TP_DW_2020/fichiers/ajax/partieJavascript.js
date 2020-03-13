@@ -137,26 +137,26 @@ function WhiteBackground() {
 
 ////////BOUTON 3///////////////////
 function CountryInfo(xmlURL, xslURL, newElement) {
-	var texteCode = window.document.getElementById("myText");
-	
-	//Loading files
-	var xsltProcessor=new XSLTProcessor();
-	var xslDocument = chargerHttpXML(xslURL);
-	xsltProcessor.importStylesheet(xslDocument);
-	xsltProcessor.setParameter("","code",texteCode.value) ;
-		
-	var xmlDocument = chargerHttpXML(xmlURL);
-	var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
-	
-	//Edit HTML
-	var elementHtmlParent = window.document.getElementById("Renseignements");
-	var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
-	var elementAInserer = newXmlDocument.getElementsByTagName(newElement)[0];
-	elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
-	
+    var texteCode = window.document.getElementById("myText");
+
+    //Loading files
+    var xsltProcessor = new XSLTProcessor();
+    var xslDocument = chargerHttpXML(xslURL);
+    xsltProcessor.importStylesheet(xslDocument);
+    xsltProcessor.setParameter("", "code", texteCode.value);
+
+    var xmlDocument = chargerHttpXML(xmlURL);
+    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+
+    //Edit HTML
+    var elementHtmlParent = window.document.getElementById("Renseignements");
+    var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
+    var elementAInserer = newXmlDocument.getElementsByTagName(newElement)[0];
+    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+
 }
 ////////BOUTON 4///////////////////
-function DisplaySVG(svgFile,name) {
+function DisplaySVG(svgFile, name) {
     var svgDoc = chargerHttpXML(svgFile);
     var svgText = new XMLSerializer().serializeToString(svgDoc);
     var parentDiv = document.getElementById(name);
@@ -164,30 +164,28 @@ function DisplaySVG(svgFile,name) {
 }
 
 ////////BOUTON 5///////////////////
-function DisplayTitle()
-{
-	var elementHtmlARemplir = window.document.getElementById("Form");
-	elementHtmlARemplir.innerHTML = this.getAttribute("title") ; 
+function DisplayTitle() {
+    var elementHtmlARemplir = window.document.getElementById("Form");
+    elementHtmlARemplir.innerHTML = this.getAttribute("title");
 }
 
 function ClickableForm() {
-	var formes = window.document.getElementById("lesFormes").children[0].children;
-    for(var i=0; i<formes.length; i++)
-    {
+    var formes = window.document.getElementById("lesFormes").children[0].children;
+    for (var i = 0; i < formes.length; i++) {
         formes[i].addEventListener("click", DisplayTitle);
     }
 }
 
 ////////BOUTON 6///////////////////
-function DisplayCountryName()
-{
-	var elementHtmlARemplir = window.document.getElementById("map");
-	elementHtmlARemplir.innerHTML = this.getAttribute("countryCode") ; 
+function DisplayCountryName() {
+    var elementHtmlARemplir = window.document.getElementById("Countries");
+    elementHtmlARemplir.innerHTML = this.getAttribute("countryname");
 }
+
 function ClickableCountry() {
-	var formes = window.document.getElementById("map").children[0].children;
-    for(var i=0; i<formes.length; i++)
-    {
+    var formes = window.document.getElementsByTagName("path");
+    console.log(formes);
+    for (var i = 0; i < formes.length; i++) {
         formes[i].addEventListener("click", DisplayCountryName);
     }
 }
