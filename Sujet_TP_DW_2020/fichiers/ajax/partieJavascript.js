@@ -267,3 +267,12 @@ function autoCompletion(xmlDocumentUrl)
 function retrieveCurrencies() {
     showCurrency = true;
 }
+////////BOUTON 11///////////////////
+function DisplayCOVIDCases()
+{
+    var covid=$.getJSON( "covid.json", function( json ) {
+        console.log( "JSON Data received, name is " + json.name);
+    });
+    var covidata=JSON.parse(covid);
+    
+}
