@@ -123,15 +123,22 @@ function Bouton4_ajaxEmployeesTableau(xmlDoc, xslDoc) {
 }
 ////////BOUTON 1///////////////////
 function BlueBackgroundWhiteButton() {
-	var arriereplan = window.document.getElementById("body");
-	arriereplan.style = "background-color:blue" ;
-	var bouton= window.document.getElementById("myButton1");
-	bouton.style = "color:white" ;
+    var arriereplan = window.document.getElementById("body");
+    arriereplan.style = "background-color:blue";
+    var bouton = window.document.getElementById("myButton1");
+    bouton.style = "color:white";
 }
 ////////BOUTON 2///////////////////
 function WhiteBackground() {
-	var arriereplan = window.document.getElementById("body");
-	arriereplan.style = "background-color:white" ;
+    var arriereplan = window.document.getElementById("body");
+    arriereplan.style = "background-color:white";
+}
+
+function AfficheSvgExemple(svgFile) {
+    var svgDoc = chargerHttpXML(svgFile);
+    var svgText = new XMLSerializer().serializeToString(svgDoc);
+    var parentDiv = document.getElementById('exemple');
+    parentDiv.innerHTML = svgText;
 }
 ////////BOUTON 3///////////////////
 function CountryInfo(xmlURL, xslURL, newElement) {
@@ -177,4 +184,23 @@ function Clickable() {
 	cercle.addEventListener("click", DisplayTitle);
 	rect.addEventListener("click", DisplayTitle);
 	courbe.addEventListener("click", DisplayTitle);
+}
+
+function Bouton3_affichePays(xmlDoc, xslDoc, newElement) {
+    var codePays = window.document.getElementById("myText3");
+
+    var xsltProcessor = new XSLTProcessor();
+    var xslDocument = chargerHttpXML(xslDoc);
+    xsltProcessor.importStylesheet(xslDocument);
+    xsltProcessor.setParameter("", "code", codePays.value);
+
+    var xmlDocument = chargerHttpXML(xmlDoc);
+    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+
+    //Remplacement dans le fichier html
+    var elementHtmlParent = window.document.getElementById("nom_capital");
+    var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
+    var elementAInserer = newXmlDocument.getElementsByTagName(newElement)[0];
+    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+
 }
