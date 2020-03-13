@@ -11,6 +11,13 @@
             <body style="background-color:white;">
                 <h1>Les pays du monde</h1>
                 <xsl:apply-templates select="//metadonnees"/>
+                <p>Pays avec 6 voisins: 
+                <xsl:for-each select="//country[count(borders/neighbour) = 6]">
+                <xsl:value-of select="current()/name/common"/> 
+                <xsl:if test="position() != last()">, </xsl:if> 
+                </xsl:for-each>
+                </p>
+                <p>Pays ayant le plus de voisins : </p>
                 <xsl:apply-templates select="//countries"/>
             </body>
         </html> 
