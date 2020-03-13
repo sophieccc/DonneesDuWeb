@@ -4,18 +4,21 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>TP 3IF Ajax</title>
-    <meta name="author" content="Elöd EGYED-ZSIGMOND">
+    <meta name="author" content="Elï¿½d EGYED-ZSIGMOND">
 
     <script type="text/javascript" src="partieJavascript.js"></script>
 
 </head>
 
-<body <p>Fichier à modifier/compélter</p>
+<body id="body" style="background-color:white">
+    <h2>Partie Ajax et DOM</h2>
+    <h4>Par CROWLEY Sophie, NASSREDDINE Zakaria et EDDAHABI Riad (B3121)</h4>
     <p>
-        <input name="button" type="button" id="myButton1" onClick="setNom(document.getElementById('myText1').value);" value="1. AJAX simple" />
-        <input name="text" type="text" id="myText1" value="Toto" />
+        <input name="Bouton1" type="button" id="myButton1" onClick="BlueBackgroundWhiteButton()" value="Arriere-plan bleu | Texte de bouton blanc" />
         <br />
-        <input name="button2" type="button" id="myButton2" onClick="Bouton2_ajaxBibliographie('ajax.bib.xml','ajax.bib.xsl','ul');" value="2. AJAX avec ajax.bib.xml/ajax.bib.xsl" />
+        <input name="Bouton2" type="button" id="myButton2" onClick="WhiteBackground()" value="Arriere-plan blanc" />
+        <br />
+        <input name="Bouton3" type="button" id="myButton3" onClick="WhiteBackground()" value="Renseignements pays" />
         <br />
         <input name="button2" type="button" id="myButton3" onClick="Bouton3_ajaxEmployees('Employees.xml');" value="3. AJAX avec Employees.xml" />
         <br />
