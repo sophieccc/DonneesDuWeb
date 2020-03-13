@@ -135,7 +135,10 @@ function WhiteBackground() {
     var arriereplan = window.document.getElementById("body");
     arriereplan.style = "background-color:white";
 }
-
+function Blacktext() {
+    var bouton = window.document.getElementById("myButton1");
+    bouton.style = "color:black";
+}
 
 ////////BOUTON 3///////////////////
 function CountryInfo(xmlURL, xslURL, newElement) {
@@ -212,7 +215,7 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
         currencyComponent.innerHTML = data.currencies[0].name;
     }
     if (showCorona) {
-        
+
         fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php", {
                 "method": "GET",
                 "headers": {
