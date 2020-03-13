@@ -190,33 +190,30 @@ function ClickableCountry() {
 }
 
 ////////BOUTON 8///////////////////
-function helper(xmlDocumentUrl, xslDocumentUrl, newElementName,pays)
-{
-	pays.style = "fill:blue";
-	var codePays = pays.id ;
-	var xsltProcessor=new XSLTProcessor();
-	var xslDocument = chargerHttpXML(xslDocumentUrl);
-	xsltProcessor.importStylesheet(xslDocument);
-	xsltProcessor.setParameter("","code",codePays) ;
-	var xmlDocument = chargerHttpXML(xmlDocumentUrl);
-	var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
-	var elementHtmlParent = window.document.getElementById("tableauCarte");
-	var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
-	var elementAInserer = newXmlDocument.getElementsByTagName(newElementName)[0];
-	elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
+    pays.style = "fill:blue";
+    var codePays = pays.id;
+    var xsltProcessor = new XSLTProcessor();
+    var xslDocument = chargerHttpXML(xslDocumentUrl);
+    xsltProcessor.importStylesheet(xslDocument);
+    xsltProcessor.setParameter("", "code", codePays);
+    var xmlDocument = chargerHttpXML(xmlDocumentUrl);
+    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+    var elementHtmlParent = window.document.getElementById("tableauCarte");
+    var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
+    var elementAInserer = newXmlDocument.getElementsByTagName(newElementName)[0];
+    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
 }
 
-function quittePays()
-{
-	this.style = "fill:#CCCCCC";
+function quittePays() {
+    this.style = "fill:#CCCCCC";
 }
 
-function mouseHover(xmlDocumentUrl, xslDocumentUrl, newElementName)
-{
-	var lesPays = window.document.getElementsByTagName("path");
+function mouseHover(xmlDocumentUrl, xslDocumentUrl, newElementName) {
+    var lesPays = window.document.getElementsByTagName("path");
     for (i = 0; i < lesPays.length; i++) {
-		lesPays[i].addEventListener("mouseover",function(){helper(xmlDocumentUrl, xslDocumentUrl, newElementName,this);}) ;
-		lesPays[i].addEventListener("mouseout",quittePays);
+        lesPays[i].addEventListener("mouseover", function() { helper(xmlDocumentUrl, xslDocumentUrl, newElementName, this); });
+        lesPays[i].addEventListener("mouseout", quittePays);
     }
 }
 
