@@ -170,7 +170,7 @@ function DisplayTitle()
 	elementHtmlARemplir.innerHTML = this.getAttribute("title") ; 
 }
 
-function Clickable() {
+function ClickableForm() {
 	var formes = window.document.getElementById("lesFormes").children[0].children;
     for(var i=0; i<formes.length; i++)
     {
@@ -179,5 +179,15 @@ function Clickable() {
 }
 
 ////////BOUTON 6///////////////////
-// Réutilisatio  code bouton 4
-
+function DisplayCountryName()
+{
+	var elementHtmlARemplir = window.document.getElementById("map");
+	elementHtmlARemplir.innerHTML = this.getAttribute("countryCode") ; 
+}
+function ClickableCountry() {
+	var formes = window.document.getElementById("map").children[0].children;
+    for(var i=0; i<formes.length; i++)
+    {
+        formes[i].addEventListener("click", DisplayCountryName);
+    }
+}
