@@ -166,15 +166,15 @@ function DisplaySVG(svgFile,name) {
 ////////BOUTON 5///////////////////
 function DisplayTitle()
 {
-	var elementHtmlARemplir = window.document.getElementById("Form");
-	elementHtmlARemplir.innerHTML = this.getAttribute("title") ; 
+	var elementHtmlARemplir = window.document.getElementById(id);
+	elementHtmlARemplir.innerHTML = this.getAttribute(title) ; 
 }
 
-function Clickable() {
-	var formes = window.document.getElementById("lesFormes").children[0].children;
+function Clickable(name,id,title) {
+	var elements = window.document.getElementById(name).children[0].children;
     for(var i=0; i<formes.length; i++)
     {
-        formes[i].addEventListener("click", DisplayTitle);
+        elements[i].addEventListener("click", DisplayTitle);
     }
 }
 
