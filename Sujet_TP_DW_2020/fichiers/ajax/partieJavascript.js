@@ -171,11 +171,9 @@ function DisplayTitle()
 }
 
 function Clickable() {
-	var cercle = window.document.getElementById("leCercle");
-	var rect = window.document.getElementById("leRect");
-	var courbe = window.document.getElementById("laCourbe");
-	
-	cercle.addEventListener("click", DisplayTitle);
-	rect.addEventListener("click", DisplayTitle);
-	courbe.addEventListener("click", DisplayTitle);
+	var formes = window.document.getElementById("lesFormes").children[0].children;
+    for(var i=0; i<formes.length; i++)
+    {
+        formes[i].addEventListener("click", DisplayTitle);
+    }
 }
