@@ -1,4 +1,5 @@
 var showCurrency = false;
+var showCorona = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function recupererPremierEnfantDeTypeNode(n) {
@@ -204,10 +205,13 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
     var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
     var elementAInserer = newXmlDocument.getElementsByTagName(newElementName)[0];
     elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+    var data = chargerHttpJSON("https://restcountries.eu/rest/v2/alpha/" + codePays);
     if (showCurrency) {
-        var data = chargerHttpJSON("https://restcountries.eu/rest/v2/alpha/" + codePays);
+        var name = data["name"];
         var currencyComponent = window.document.getElementById("curr");
         currencyComponent.innerHTML = data.currencies[0].name;
+    }
+    if (showCorona) {
         fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php", {
                 "method": "GET",
                 "headers": {
@@ -216,8 +220,19 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
                 }
             })
             .then(response => {
-                console.log(response.json().then(function(data) {
-                        console.log(data["name"]);
+                console.log(response.json().then(function(coronaData) {
+                        var cases = -1;
+                        for (var i = 0; i < coronaData.countries_stat.length; i++) {
+                            if (coronaData.countries_stat[i].country_name == name) {
+                                cases = coronaData.countries_stat[i].cases;
+                            }
+                        }
+                        var coronaComponent = window.document.getElementById("corona");
+                        if (cases >= 0) {
+                            coronaComponent.innerHTML = "No. of COVID-19 cases: " + cases;
+                        } else {
+                            coronaComponent.innerHTML = "Could not retrieve no. of cases";
+                        }
                     }))
                     .catch(err => {
                         console.log(err);
@@ -267,12 +282,7 @@ function autoCompletion(xmlDocumentUrl)
 function retrieveCurrencies() {
     showCurrency = true;
 }
-////////BOUTON 11///////////////////
-function DisplayCOVIDCases()
-{
-    var covid=$.getJSON( "covid.json", function( json ) {
-        console.log( "JSON Data received, name is " + json.name);
-    });
-    var covidata=JSON.parse(covid);
-    
+
+function getCases() {
+    showCorona = true;
 }
