@@ -1,3 +1,4 @@
+var showCurrency = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function recupererPremierEnfantDeTypeNode(n) {
@@ -203,6 +204,11 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
     var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
     var elementAInserer = newXmlDocument.getElementsByTagName(newElementName)[0];
     elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
+    if (showCurrency) {
+        var data = chargerHttpJSON("https://restcountries.eu/rest/v2/alpha/" + codePays);
+        var currencyComponent = window.document.getElementById("curr");
+        currencyComponent.innerHTML = data.currencies[0].name;
+    }
 }
 
 function quittePays() {
@@ -234,11 +240,5 @@ function autoCompletion(xmlDocumentUrl) {
 }
 
 function retrieveCurrencies() {
-    var data = chargerHttpJSON("https://restcountries.eu/rest/v2/currency/cop")[0];
-    console.log(data.currencies[0].name);
-    var lesPays = window.document.getElementsByTagName("path");
-    for (i = 0; i < lesPays.length; i++) {
-        lesPays[i].addEventListener("mouseover", function() {});
-    }
-
+    showCurrency = true;
 }
