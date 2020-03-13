@@ -219,3 +219,21 @@ function mouseHover(xmlDocumentUrl, xslDocumentUrl, newElementName)
 		lesPays[i].addEventListener("mouseout",quittePays);
     }
 }
+
+////////BOUTON 9///////////////////
+function autoCompletion(xmlDocumentUrl)
+{	
+	var texteCode = window.document.getElementById("myText");
+	texteCode.setAttribute("list","codeList");
+	texteCode.innerHTML = "<datalist id = 'codeList'></datalist>" ;
+	
+	var xmlDocument = chargerHttpXML(xmlDocumentUrl);
+	var codes = xmlDocument.getElementsByTagName("cca2");
+	var liste = "<option value='Code pays'/>" ;
+	for(i = 0 ; i < codes.length ; i++)
+	{
+		liste = liste + "<option value ='" + codes[i].firstChild.nodeValue + "'/>" ;
+	}
+	var component = window.document.getElementById("codeList");
+	component.innerHTML = liste ;
+}
