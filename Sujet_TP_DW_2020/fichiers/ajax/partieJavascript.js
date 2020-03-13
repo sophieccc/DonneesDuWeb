@@ -218,28 +218,31 @@ function mouseHover(xmlDocumentUrl, xslDocumentUrl, newElementName) {
 }
 
 ////////BOUTON 9///////////////////
-/*function autoCompletion(xmlDocumentUrl)
+function autoCompletion(xmlDocumentUrl)
 {	
 	var texteCode = window.document.getElementById("myText");
     texteCode.setAttribute("list","codeList");
+    var txtcont=texteCode.textContent;
     texteCode.setAttribute('autocomplete','on');
 	texteCode.innerHTML = "<datalist id = 'codeList'></datalist>" ;
 	
 	var xmlDocument = chargerHttpXML(xmlDocumentUrl);
-	var codes = xmlDocument.getElementsByTagName("cca2");
+    var codes = xmlDocument.getElementsByTagName("cca2");
+    console.log(codes);
 	var liste = "<option value='Code pays'/>" ;
 	for(var i = 0 ; i < codes.length ; i++)
 	{
-        //if(codes[i].firstChild.nodeValue.textContent().startsWith(texteCode.textContent()))
+        var codecnt=codes[i].firstChild.nodeValue;
+        if(codecnt.startsWith(txtcont))
         {
-            liste = liste + "<option value ='" + codes[i].firstChild.nodeValue + "'/>" ;
+            liste += "<option value ='" + codes[i].firstChild.nodeValue + "'/>" ;
         }
 	}
 	var component = window.document.getElementById("codeList");
 	component.innerHTML = liste ;
-}*/
+}
 
-function autoCompletion(xmlDocumentUrl,datalistId)
+/*function autoCompletion(xmlDocumentUrl,datalistId)
 {
     var xsltProcessor = new XSLTProcessor();
     var xslDocument = chargerHttpXML('codeList.xsl');
@@ -248,16 +251,20 @@ function autoCompletion(xmlDocumentUrl,datalistId)
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
     var dlist=document.getElementById(datalistId);
     var children = newXmlDocument.getElementsByTagName('option');
-    for (child of children)
-    {
-        dlist.appendChild(child);
-    }
     var texteCode = window.document.getElementById("myText");
     texteCode.setAttribute('list',datalistId);
+    for (child of children)
+    {
+        if (child.value.substr(0, texteCode.value.length).toUpperCase() == texteCode.value.toUpperCase())
+        {
+            dlist.appendChild(child);
+        }
+    }
     //texteCode.setAttribute('autocomplete','on');
-}
+}*/
 
-function autocomplete(inp,xmlDocumentUrl) {
+function autocomplete(inpId,xmlDocumentUrl) {
+    inp=window.document.getElementById(inpId);
     var xmlDocument = chargerHttpXML(xmlDocumentUrl);
 	var arr = xmlDocument.getElementsByTagName("cca2");
     /*the autocomplete function takes two arguments,
@@ -357,7 +364,7 @@ function autocomplete(inp,xmlDocumentUrl) {
   } 
 
 
-function autoCompletion(xmlDocumentUrl) {
+/*function autoCompletion(xmlDocumentUrl) {
     var texteCode = window.document.getElementById("myText");
     texteCode.setAttribute("list", "codeList");
     texteCode.innerHTML = "<datalist id = 'codeList'></datalist>";
@@ -370,7 +377,7 @@ function autoCompletion(xmlDocumentUrl) {
     }
     var component = window.document.getElementById("codeList");
     component.innerHTML = liste;
-}
+}*/
 
 function retrieveCurrencies() {
     var data = chargerHttpJSON("https://restcountries.eu/rest/v2/currency/cop")[0];
