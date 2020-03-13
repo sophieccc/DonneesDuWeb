@@ -208,6 +208,21 @@ function helper(xmlDocumentUrl, xslDocumentUrl, newElementName, pays) {
         var data = chargerHttpJSON("https://restcountries.eu/rest/v2/alpha/" + codePays);
         var currencyComponent = window.document.getElementById("curr");
         currencyComponent.innerHTML = data.currencies[0].name;
+        fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+                    "x-rapidapi-key": "f53896cd01mshbe9fd33ef346edfp125fd3jsn57b068e63890"
+                }
+            })
+            .then(response => {
+                console.log(response.json().then(function(data) {
+                        console.log(data["name"]);
+                    }))
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
     }
 }
 
