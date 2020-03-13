@@ -36,15 +36,30 @@
     </xsl:template>
 
     <xsl:template match="countries">
+        <xsl:for-each select = "//country/infosContinent/continent[not(preceding::* = .)]">
+        <h3>Pays du continent: <xsl:value-of select='.' /> par sous-régions : </h3> 
+        <xsl:for-each select = "//country/infosContinent/subregion[../continent[text()=current()]][not(preceding::* = .)]">
+        <h4><xsl:value-of select = "."/> (<xsl:value-of select = "count(//country[infosContinent[subregion=current()]])"/>)</h4>
         <table border="3" width="100%" align="center">
-        <xsl:apply-templates select="//country"/>
+            <tr>
+                <th>N°</th>
+                <th>Nom</th>
+                <th>Capitale</th>
+                <th>Voisins</th>
+                <th>Coordonnées</th>
+                <th>Drapeau</th>
+            </tr>
+        <xsl:apply-templates select="//country[infosContinent/subregion[text() = current()]]"/>
         </table>
+        </xsl:for-each>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template match="country"> 
         <tr>
         <td>
-        <xsl:value-of select="count(preceding-sibling::country)+1"/>
+        <xsl:value-of select="count(preceding-sibling::country[infosContinent/subregion
+        [text()=current()/infosContinent/subregion/text()]])+1"/>
         </td>
             <td>
                 <span style="color:green;"><xsl:value-of select="name/common"/></span>
