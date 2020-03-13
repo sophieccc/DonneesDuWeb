@@ -32,7 +32,7 @@
         <br />
         <input name="Bouton8" type="button" id="myButton8" onClick="mouseHover('countriesTP.xml', 'cherchePays.xsl', 'div')" value="Preview passage de la souris sur la carte" />
         <br/>
-        <input name="Bouton9" type="button" id="myButton9" onClick="autoCompletion('countriesTP.xml')" value="Activer l'autocompletion sur le champ de code pays" />
+        <input name="Bouton9" type="button" id="myButton9" onClick="autoCompletion('countriesTP.xml','codeList')" value="Activer l'autocompletion sur le champ de code pays" />
 		<br/>
     </p>
 
@@ -58,13 +58,15 @@
     <div id="tableauCarte" align="center">
         <table border="1">
             <tr>
-                <th>nom</th>
-                <th>capitale</th>
-                <th>drapeau</th>
+                <th>Nom</th>
+                <th>Capitale</th>
+                <th>Drapeau</th>
             </tr>
         </table>
     </div>
 
+    <datalist id="codeList">       
+    </datalist>
 </body>
 
 </html>
