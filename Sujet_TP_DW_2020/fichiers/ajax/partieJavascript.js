@@ -156,10 +156,10 @@ function CountryInfo(xmlURL, xslURL, newElement) {
 	
 }
 ////////BOUTON 4///////////////////
-function AfficheSvgExemple(svgFile) {
+function DisplaySVG(svgFile,name) {
     var svgDoc = chargerHttpXML(svgFile);
     var svgText = new XMLSerializer().serializeToString(svgDoc);
-    var parentDiv = document.getElementById('exemple');
+    var parentDiv = document.getElementById(name);
     parentDiv.innerHTML = svgText;
 }
 
@@ -177,3 +177,7 @@ function Clickable() {
         formes[i].addEventListener("click", DisplayTitle);
     }
 }
+
+////////BOUTON 6///////////////////
+// Réutilisatio  code bouton 4
+
