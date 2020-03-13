@@ -218,19 +218,28 @@ function mouseHover(xmlDocumentUrl, xslDocumentUrl, newElementName) {
 }
 
 ////////BOUTON 9///////////////////
-function autoCompletion(xmlDocumentUrl)
-{	
-	var texteCode = window.document.getElementById("myText");
-	texteCode.setAttribute("list","codeList");
-	texteCode.innerHTML = "<datalist id = 'codeList'></datalist>" ;
-	
-	var xmlDocument = chargerHttpXML(xmlDocumentUrl);
-	var codes = xmlDocument.getElementsByTagName("cca2");
-	var liste = "<option value='Code pays'/>" ;
-	for(i = 0 ; i < codes.length ; i++)
-	{
-		liste = liste + "<option value ='" + codes[i].firstChild.nodeValue + "'/>" ;
-	}
-	var component = window.document.getElementById("codeList");
-	component.innerHTML = liste ;
+function autoCompletion(xmlDocumentUrl) {
+    var texteCode = window.document.getElementById("myText");
+    texteCode.setAttribute("list", "codeList");
+    texteCode.innerHTML = "<datalist id = 'codeList'></datalist>";
+
+    var xmlDocument = chargerHttpXML(xmlDocumentUrl);
+    var codes = xmlDocument.getElementsByTagName("cca2");
+    var liste = "<option value='Code pays'/>";
+    for (i = 0; i < codes.length; i++) {
+        liste = liste + "<option value ='" + codes[i].firstChild.nodeValue + "'/>";
+    }
+    var component = window.document.getElementById("codeList");
+    component.innerHTML = liste;
+}
+
+function retrieveCurrencies() {
+    var data = chargerHttpJSON("https://restcountries.eu/rest/v2/currency/cop");
+    console.log(data[0]);
+    console.log(data["currencies"]["name"]);
+    var lesPays = window.document.getElementsByTagName("path");
+    for (i = 0; i < lesPays.length; i++) {
+        lesPays[i].addEventListener("mouseover", function() {});
+    }
+
 }
